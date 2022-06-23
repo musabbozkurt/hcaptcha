@@ -20,7 +20,7 @@ public class HCaptchaController {
      *
      * @param captchaResponse gets captcha response.
      */
-    @PostMapping("/me/signup")
+    @PostMapping("/validate")
     public HCaptchaResponse signup(@RequestParam(value = "h-captcha-response", defaultValue = "10000000-aaaa-bbbb-cccc-000000000001") String captchaResponse) {
         if (StringUtils.hasText(captchaResponse)) {
             hCaptchaService.validateRequestWithHttpClient(captchaResponse);
