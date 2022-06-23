@@ -1,0 +1,10 @@
+feign:
+  services:
+    # https://docs.hcaptcha.com/#integration-testing-test-keys
+    hcaptcha:
+      url: ${HCAPTCHA_URL:https://hcaptcha.com}
+      secret: ${HCAPTCHA_SECRET:0x0000000000000000000000000000000000000000}
+      response: ${HCAPTCHA_RESPONSE:10000000-aaaa-bbbb-cccc-000000000001}
+      site-key: ${HCAPTCHA_SITE_KEY:10000000-ffff-ffff-ffff-000000000001} # Optional
+      remote-ip: ${HCAPTCHA_REMOTE_IP:127.0.0.1} # Optional
+
