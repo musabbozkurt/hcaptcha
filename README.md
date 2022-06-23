@@ -15,7 +15,7 @@
 ### Summary
 
 * HCaptcha integration was implemented in 1 endpoint with 3 different services.
-* Curl example -> **curl --location --request POST 'http://localhost:8080/me/signup'**
+* Curl example -> **curl --location --request POST 'http://localhost:8080/validate'**
 
 
 <!-- Prerequisites and Installation -->
