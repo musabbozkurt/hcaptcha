@@ -45,13 +45,13 @@ public class HCaptchaServiceImpl implements HCaptchaService {
                     .timeout(Duration.ofSeconds(10))
                     .POST(HttpRequest.BodyPublishers.ofString(hCaptchaRequest)).build();
 
-            Gson gSonInstance = new GsonBuilder()
+            Gson gson = new GsonBuilder()
                     .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
                     .setPrettyPrinting()
                     .registerTypeAdapter(OffsetDateTime.class, (JsonDeserializer<OffsetDateTime>) (json, type, context) -> OffsetDateTime.parse(json.getAsString()))
                     .create();
 
-            HCaptchaResponse hCaptchaResponse = gSonInstance.fromJson(httpClient.send(request, HttpResponse.BodyHandlers.ofString()).body(), HCaptchaResponse.class);
+            HCaptchaResponse hCaptchaResponse = gson.fromJson(httpClient.send(request, HttpResponse.BodyHandlers.ofString()).body(), HCaptchaResponse.class);
             log.info("hCaptchaResponse from validateRequestWithHttpClient : {} ", hCaptchaResponse);
             return hCaptchaResponse;
         } catch (Exception e) {
@@ -63,7 +63,7 @@ public class HCaptchaServiceImpl implements HCaptchaService {
     @Override
     public HCaptchaResponse validateRequestWithMultiValueMap(String captchaResponse) {
         try {
-            MultiValueMap<String, Object> hCaptchaRequest = new LinkedMultiValueMap();
+            MultiValueMap<String, Object> hCaptchaRequest = new LinkedMultiValueMap<>();
             hCaptchaRequest.add("response", captchaResponse);
             hCaptchaRequest.add("secret", hCaptchaProperties.getSecret());
             hCaptchaRequest.add("sitekey", hCaptchaProperties.getSiteKey());
